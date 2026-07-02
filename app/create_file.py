@@ -7,7 +7,7 @@ def create_file_in_directory() -> None:
     if "-d" in sys.argv and "-f" in sys.argv:
         path = (sys.argv[sys.argv.index("-d") + 1:sys.argv.index("-f")])
         create_directory(path)
-        os.chdir(*path)
+        os.chdir(os.path.join(*path))
         create_file()
     elif "-d" in sys.argv:
         path = sys.argv[sys.argv.index("-d") + 1:]
@@ -22,8 +22,8 @@ def create_directory(path: list) -> None:
 
 def create_file() -> None:
     path = os.path.join(os.getcwd(), sys.argv[sys.argv.index("-f") + 1])
-    with open(path, "a") as f:
-        if not f.readlines():
+    with open(path, "a+") as f:
+        if os.path.getsize(path) > 0:
             f.write("\n\n")
         f.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         line_num = 0
