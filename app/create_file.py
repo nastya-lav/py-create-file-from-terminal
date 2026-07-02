@@ -23,7 +23,7 @@ def create_directory(path: list) -> None:
 def create_file() -> None:
     path = os.path.join(os.getcwd(), sys.argv[sys.argv.index("-f") + 1])
     with open(path, "a") as f:
-        if not f.readlines() :
+        if not f.readlines():
             f.write("\n\n")
         f.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         line_num = 0
